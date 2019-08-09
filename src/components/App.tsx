@@ -7,11 +7,12 @@ import { ButtonsGroup } from './ButtonsGroup'
 const stylesApp = (theme: Theme) =>
   createStyles({
     root: {
-      width: '400px',
       padding: theme.spacing(2),
       position: 'absolute',
-      left: 'calc(50% - 216px)',
-      top: 'calc(50% - 120px)'
+      width: '280px',
+      left: 'calc(50% - 156px)',
+      top: 'calc(50% - 120px)',
+      backgroundColor: 'rgba(30, 38, 47, .8)'
     }
   })
 

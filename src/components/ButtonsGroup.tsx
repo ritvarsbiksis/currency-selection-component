@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
 import { Theme, WithStyles, createStyles, withStyles } from '@material-ui/core/styles'
 import _ from 'lodash'
-import { CheckBoxRounded } from '@material-ui/icons'
 
 import { availableCurrency } from '../utils/initialData'
+import { CurrencyBtn, CurrencyBtnProps } from './CurrencyBtn'
 
 const styleButtonsGroup = (theme: Theme) =>
   createStyles({
@@ -13,10 +12,6 @@ const styleButtonsGroup = (theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'space-between',
       alignContent: 'space-between'
-    },
-    margin: {
-      flexBasis: 'calc(33.33% - 8px)'
-      //   margin: theme.spacing(1)
     }
   })
 
@@ -30,7 +25,7 @@ class _ButtonsGroup extends Component<Props> {
     return (
       <div
         {...{
-          style: { height: `calc(${rows} * 44px)` },
+          style: { height: `calc(${rows} * 40px)` },
           className: classes.root
         }}>
         {this.renderButtonList()}
@@ -39,21 +34,11 @@ class _ButtonsGroup extends Component<Props> {
   }
 
   renderButtonList = () => {
-    const { classes } = this.props
-
     return _.map(availableCurrency, (currency: string, key: string) => {
       return (
-        <Button
-          {...{
-            variant: 'outlined',
-            size: 'medium',
-            color: 'primary',
-            className: classes.margin,
-            key
-          }}>
-          <CheckBoxRounded />
+        <CurrencyBtn {...{ key, checkedCurrency: _.includes([ 'CZK', 'DKK', 'GEL' ], currency) }}>
           {currency}
-        </Button>
+        </CurrencyBtn>
       )
     })
   }
