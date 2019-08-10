@@ -10,7 +10,7 @@ const styleSelectedCurrencyBlock = (theme: Theme) =>
   createStyles({
     root: {
       bottom: '50%',
-      minHeight: 162,
+      height: 153,
       top: 'unset',
       zIndex: 5,
       backgroundColor: 'rgba(158, 99, 220, 0.67)',
@@ -27,12 +27,11 @@ class _SelectedCurrencyBlock extends Component<SelectedCurrencyBlockProps> {
   render () {
     const { classes } = this.props
     // const rows: number = _.ceil(availableCurrency.length / 3)
+    const rows = 1
 
     return (
       <Paper {...{ className: classes.root }}>
-        <GridContainer {...{ rows: 1 }}>
-          <CurrencyTxtBox>EUR</CurrencyTxtBox>
-          <CurrencyTxtBox>DKK</CurrencyTxtBox>
+        <GridContainer {...{ height: `calc(${rows} * 35px)` }}>
           <CurrencyTxtBox>EUR</CurrencyTxtBox>
           <CurrencyTxtBox>DKK</CurrencyTxtBox>
         </GridContainer>

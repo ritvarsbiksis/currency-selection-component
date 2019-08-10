@@ -29,7 +29,7 @@ class _CurrenciesBlock extends Component<CurrenciesBlockProps> {
 
     return (
       <Paper {...{ className: classes.root }}>
-        <GridContainer {...{ rows }}>{this.renderButtonList()}</GridContainer>
+        <GridContainer {...{ height: `calc(${rows} * 40px)` }}>{this.renderButtonList()}</GridContainer>
       </Paper>
     )
   }

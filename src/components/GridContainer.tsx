@@ -13,14 +13,14 @@ const styleGridContainer = (theme: Theme) =>
 
 interface GridContainerProps extends WithStyles<typeof styleGridContainer> {
   children: React.ReactNode
-  rows: number
+  height: string
 }
 
-const _GridContainer = ({ classes, children, rows = 3 }: GridContainerProps) => {
+const _GridContainer = ({ classes, children, height }: GridContainerProps) => {
   return (
     <div
       {...{
-        style: { height: `calc(${rows} * 40px)` },
+        style: { height },
         className: classes.root
       }}>
       {children}
