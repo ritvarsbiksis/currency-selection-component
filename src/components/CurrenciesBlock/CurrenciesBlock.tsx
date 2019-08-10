@@ -7,7 +7,8 @@ import { Paper } from '@material-ui/core'
 import { availableCurrency } from '../../utils/initialData'
 import { CurrencyBtn } from './CurrencyBtn'
 import { GridContainer } from '../GridContainer'
-import { addCurrency } from '../../actions'
+import { addCurrency, removeCurrency, Currencies } from '../../actions'
+import { StoreState } from '../../reducers'
 
 const styleCurrenciesBlock = (theme: Theme) =>
   createStyles({
@@ -24,13 +25,15 @@ const styleCurrenciesBlock = (theme: Theme) =>
 
 interface CurrenciesBlockProps extends WithStyles<typeof styleCurrenciesBlock> {
   addCurrency: typeof addCurrency
+  removeCurrency: typeof removeCurrency
+  currencies: Currencies[]
 }
 
 class _CurrenciesBlock extends Component<CurrenciesBlockProps> {
   componentDidMount (): void {
     this.props.addCurrency({
-      id: 'eur',
-      title: 'EUR'
+      id: 'usd',
+      title: 'USD'
     })
   }
 
@@ -46,14 +49,29 @@ class _CurrenciesBlock extends Component<CurrenciesBlockProps> {
   }
 
   renderButtonList = () => {
-    return _.map(availableCurrency, (currency: string, key: string) => {
+    const { addCurrency, removeCurrency, currencies } = this.props
+
+    return _.map(availableCurrency, (currency: Currencies) => {
+      const checkedCurrency = _.find(currencies, currency)
+
       return (
-        <CurrencyBtn {...{ key, checkedCurrency: _.includes([ 'CZK', 'DKK', 'GEL' ], currency) }}>
-          {currency}
+        <CurrencyBtn
+          {...{
+            key: currency.id,
+            onClick: () => (checkedCurrency ? removeCurrency(currency.id) : addCurrency(currency)),
+            checkedCurrency
+          }}>
+          {currency.title}
         </CurrencyBtn>
       )
     })
   }
 }
 
-export const CurrenciesBlock = withStyles(styleCurrenciesBlock)(connect(null, { addCurrency })(_CurrenciesBlock))
+const mapStateToProps = ({ currencies }: StoreState): { currencies: Currencies[] } => {
+  return { currencies }
+}
+
+export const CurrenciesBlock = withStyles(styleCurrenciesBlock)(
+  connect(mapStateToProps, { addCurrency, removeCurrency })(_CurrenciesBlock)
+)

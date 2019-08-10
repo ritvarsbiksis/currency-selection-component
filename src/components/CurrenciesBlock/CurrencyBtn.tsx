@@ -4,6 +4,8 @@ import { Theme, WithStyles, withStyles } from '@material-ui/core/styles'
 import { CheckBoxRounded, CheckBoxOutlineBlankRounded } from '@material-ui/icons'
 import cx from 'classnames'
 
+import { Currencies } from '../../actions'
+
 const styleCurrencyBtn = (theme: Theme) => {
   return {
     root: {
@@ -37,7 +39,7 @@ const styleCurrencyBtn = (theme: Theme) => {
 }
 
 export interface CurrencyBtnProps extends WithStyles<typeof styleCurrencyBtn> {
-  checkedCurrency: boolean
+  checkedCurrency: Currencies | undefined
 }
 
 class _CurrencyBtn extends Component<CurrencyBtnProps> {
