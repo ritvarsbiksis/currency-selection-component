@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 import { Theme, WithStyles, createStyles, withStyles } from '@material-ui/core/styles'
 import { Paper } from '@material-ui/core'
@@ -6,6 +7,7 @@ import { Paper } from '@material-ui/core'
 import { availableCurrency } from '../../utils/initialData'
 import { CurrencyBtn } from './CurrencyBtn'
 import { GridContainer } from '../GridContainer'
+import { addCurrency } from '../../actions'
 
 const styleCurrenciesBlock = (theme: Theme) =>
   createStyles({
@@ -20,9 +22,18 @@ const styleCurrenciesBlock = (theme: Theme) =>
     }
   })
 
-interface CurrenciesBlockProps extends WithStyles<typeof styleCurrenciesBlock> {}
+interface CurrenciesBlockProps extends WithStyles<typeof styleCurrenciesBlock> {
+  addCurrency: typeof addCurrency
+}
 
 class _CurrenciesBlock extends Component<CurrenciesBlockProps> {
+  componentDidMount (): void {
+    this.props.addCurrency({
+      id: 'eur',
+      title: 'EUR'
+    })
+  }
+
   render () {
     const { classes } = this.props
     const rows: number = _.ceil(availableCurrency.length / 3)
@@ -45,4 +56,4 @@ class _CurrenciesBlock extends Component<CurrenciesBlockProps> {
   }
 }
 
-export const CurrenciesBlock = withStyles(styleCurrenciesBlock)(_CurrenciesBlock)
+export const CurrenciesBlock = withStyles(styleCurrenciesBlock)(connect(null, { addCurrency })(_CurrenciesBlock))
