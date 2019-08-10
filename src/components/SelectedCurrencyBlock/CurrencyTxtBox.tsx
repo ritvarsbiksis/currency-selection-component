@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Theme, WithStyles, withStyles, createStyles } from '@material-ui/core/styles'
+
+import { removeCurrency } from '../../actions'
 import { CloseIconBtn } from './CloseIconBtn'
 // import cx from 'classnames'
 
@@ -24,19 +27,26 @@ const styleCurrencyTxtBox = (theme: Theme) =>
     }
   })
 
-export interface CurrencyTxtBoxProps extends WithStyles<typeof styleCurrencyTxtBox> {}
+export interface CurrencyTxtBoxProps extends WithStyles<typeof styleCurrencyTxtBox> {
+  removeCurrency: typeof removeCurrency
+  id: string
+}
 
 class _CurrencyTxtBox extends Component<CurrencyTxtBoxProps> {
   render () {
-    const { classes, children } = this.props
+    const { classes, children, removeCurrency, id } = this.props
 
     return (
       <div {...{ className: classes.root }}>
         {children}
-        <CloseIconBtn />
+        <CloseIconBtn
+          {...{
+            onClick: () => removeCurrency(id)
+          }}
+        />
       </div>
     )
   }
 }
 
-export const CurrencyTxtBox = withStyles(styleCurrencyTxtBox)(_CurrencyTxtBox)
+export const CurrencyTxtBox = withStyles(styleCurrencyTxtBox)(connect(null, { removeCurrency })(_CurrencyTxtBox))

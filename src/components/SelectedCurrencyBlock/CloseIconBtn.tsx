@@ -39,9 +39,9 @@ const HomeIcon = (props: SvgIconProps) => {
   )
 }
 
-const _CloseIconBtn = ({ classes }: CloseIconBtnProps) => {
+const _CloseIconBtn = ({ classes, ...rest }: CloseIconBtnProps) => {
   return (
-    <IconButton {...{ className: classes.root, 'aria-label': 'close' }}>
+    <IconButton {...{ className: classes.root, 'aria-label': 'close', ...rest }}>
       <HomeIcon {...{ className: classes.icon, viewBox: '0 0 42 42' }} />
     </IconButton>
   )

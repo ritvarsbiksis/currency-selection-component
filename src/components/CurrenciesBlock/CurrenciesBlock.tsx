@@ -17,7 +17,7 @@ const styleCurrenciesBlock = (theme: Theme) =>
       position: 'absolute',
       width: '280px',
       left: 'calc(50% - 156px)',
-      top: 'calc(50% - 120px)',
+      top: 'calc(50% - 80px)',
       backgroundColor: 'rgb(30, 38, 47)',
       zIndex: 10
     }
@@ -30,13 +30,6 @@ interface CurrenciesBlockProps extends WithStyles<typeof styleCurrenciesBlock> {
 }
 
 class _CurrenciesBlock extends Component<CurrenciesBlockProps> {
-  componentDidMount (): void {
-    this.props.addCurrency({
-      id: 'usd',
-      title: 'USD'
-    })
-  }
-
   render () {
     const { classes } = this.props
     const rows: number = _.ceil(availableCurrency.length / 3)
