@@ -16,6 +16,7 @@ const styleCurrencyTxtBox = (theme: Theme) =>
       justifyContent: 'center',
       backgroundColor: 'rgba(26, 7, 39, 0.75)',
       borderRadius: 3,
+      paddingTop: 2,
       '&:nth-child(3n+3)': {
         marginRight: 0
       }
