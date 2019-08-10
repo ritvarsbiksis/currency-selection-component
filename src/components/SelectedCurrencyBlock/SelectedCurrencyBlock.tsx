@@ -19,7 +19,9 @@ const styleSelectedCurrencyBlock = (theme: Theme) =>
       width: 272,
       left: 'calc(50% - 152px)',
       padding: theme.spacing(2),
-      position: 'absolute'
+      position: 'absolute',
+      transition: 'height',
+      transitionDuration: '500ms'
     }
   })
 

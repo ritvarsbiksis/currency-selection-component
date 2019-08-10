@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Theme, WithStyles, withStyles, createStyles } from '@material-ui/core/styles'
+import Fade from '@material-ui/core/Fade'
 
 import { removeCurrency } from '../../actions'
 import { CloseIconBtn } from './CloseIconBtn'
@@ -37,14 +38,16 @@ class _CurrencyTxtBox extends Component<CurrencyTxtBoxProps> {
     const { classes, children, removeCurrency, id } = this.props
 
     return (
-      <div {...{ className: classes.root }}>
-        {children}
-        <CloseIconBtn
-          {...{
-            onClick: () => removeCurrency(id)
-          }}
-        />
-      </div>
+      <Fade in {...{ timeout: 500 }}>
+        <div {...{ className: classes.root }}>
+          {children}
+          <CloseIconBtn
+            {...{
+              onClick: () => removeCurrency(id)
+            }}
+          />
+        </div>
+      </Fade>
     )
   }
 }
